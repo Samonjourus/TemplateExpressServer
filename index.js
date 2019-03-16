@@ -30,7 +30,7 @@ webServer.use(function(req, res, next){
 });
 
 webServer.use(endpoints)
-webServer.use(EXPRESS.static(PATH.join(__dirname,"\\webpages")))
+webServer.use(EXPRESS.static(PATH.join(__dirname,"webpages")))
 webServer.listen(port, function(){
   console.log("webserver running on port " + port);
 })
