@@ -1,8 +1,12 @@
 // npm packages
-const request = require("supertest");
+let chai = require('chai');
+let chaiHttp = require('chai-http');
 
 // local imports
 var app = require("../app.js")
+
+chai.use(chaiHttp)
+chai.should();
 
 // opening connections should happen here
 beforeEach(async () => {
@@ -16,10 +20,10 @@ afterEach(async () => {
 
 describe("GET /api/status", () => {
     it("should always return {'status':'good'}", async () => {
-        const res = await request(app).get("/api/status");
-        expect(res.statusCode).toBe(200);
-        expect(res.get("Content-type")).toBe("application/json")
-        expect(res.body["status"]).toBe("good");
+        const res = await chai.request(app).get("/api/status");
+        res.should.have.status(200);
+        res.should.have.header("Content-Type", "application/json")
+        res.body.should.have.property("status").equal("good");
     });
 });
   

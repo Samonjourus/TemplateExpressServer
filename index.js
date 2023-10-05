@@ -2,6 +2,7 @@
 var swaggerJsdoc = require("swagger-jsdoc")
 var swaggerUi = require("swagger-ui-express");
 var fileSystem = require("fs")
+const dotenv = require("dotenv").config
 
 // local imports
 var webServer = require("./app.js")

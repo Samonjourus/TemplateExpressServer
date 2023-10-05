@@ -4,7 +4,7 @@
   "description": "template express server",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "mocha --timeout 10000"
   },
   "jest": {
     "collectCoverage": true
@@ -12,12 +12,14 @@
   "author": "Benjamin Standfield",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.16.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "supertest": "^6.3.3"
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.2.0"
   }
 }
