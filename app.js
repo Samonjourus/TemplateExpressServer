@@ -5,7 +5,7 @@ const BODYPARSER = require("body-parser")
 const PATH = require("path")
 
 // local imports
-var endpoints = require("./endpoints/endpoints.js")
+var statusEndpoints = require("./endpoints/status.js")
 
 var webServer = EXPRESS();
 
@@ -29,7 +29,7 @@ webServer.use(function(req, res, next){
     next();
 });
 
-webServer.use(endpoints)
+webServer.use("/api/status", statusEndpoints)
 webServer.use(EXPRESS.static(PATH.join(__dirname,"webpages")))
 
 module.exports = webServer

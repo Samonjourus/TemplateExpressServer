@@ -22,7 +22,7 @@ describe("GET /api/status", () => {
     it("should always return {'status':'good'}", async () => {
         const res = await chai.request(app).get("/api/status");
         res.should.have.status(200);
-        res.should.have.header("Content-Type", "application/json")
+        res.should.have.header("Content-Type", "application/json; charset=utf-8")
         res.body.should.have.property("status").equal("good");
     });
 });
