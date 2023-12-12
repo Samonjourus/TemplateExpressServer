@@ -2,13 +2,13 @@
 var swaggerJsdoc = require("swagger-jsdoc")
 var swaggerUi = require("swagger-ui-express");
 var fileSystem = require("fs")
-const dotenv = require("dotenv").config
+const dotenv = require("dotenv").config()
 
 // local imports
 var webServer = require("./app.js")
 
 // parameters
-var port = 8080;
+var port = process.env["PORT"];
 
 // read package.json fields for populating swagger documentation info
 let packageJSON = JSON.parse(fileSystem.readFileSync("./package.json"))
