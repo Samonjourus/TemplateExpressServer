@@ -36,8 +36,8 @@ webServer.use(function(req, res, next){
 let packageJSON = JSON.parse(fileSystem.readFileSync("./package.json"))
 
 let servers = [process.env.TEMPLATESERVERHOST + ":" + process.env.TEMPLATESERVERPORT]
-if (process.env.TEMPLATESERVERSERVERS !== "") {
-  servers = servers.concat(process.env.TEMPLATESERVERSERVERS.split(";"))
+if (process.env.TEMPLATESERVERALTERNATIVES !== "") {
+  servers = servers.concat(process.env.TEMPLATESERVERALTERNATIVES.split(";"))
 }
 
 // swagger documentation parameters
