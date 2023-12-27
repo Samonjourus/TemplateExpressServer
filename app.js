@@ -3,6 +3,9 @@ const EXPRESS = require("express")
 const FILESYSTEM = require("fs")
 const BODYPARSER = require("body-parser")
 const PATH = require("path")
+var fileSystem = require("fs")
+var swaggerJsdoc = require("swagger-jsdoc")
+var swaggerUi = require("swagger-ui-express");
 
 // local imports
 var statusEndpoints = require("./endpoints/status.js")
@@ -29,7 +32,43 @@ webServer.use(function(req, res, next){
     next();
 });
 
+// read package.json fields for populating swagger documentation info
+let packageJSON = JSON.parse(fileSystem.readFileSync("./package.json"))
+
+let servers = [process.env.TEMPLATESERVERHOST + ":" + process.env.TEMPLATESERVERPORT]
+if (process.env.TEMPLATESERVERSERVERS !== "") {
+  servers = servers.concat(process.env.TEMPLATESERVERSERVERS.split(";"))
+}
+
+// swagger documentation parameters
+const options = {
+  definition: {
+    openapi: "3.1.0",
+    info: {
+      title: packageJSON["config"]["title"],
+      version: packageJSON["version"],
+      description:
+        packageJSON["description"],
+      license: {
+        name: packageJSON["license"]
+      },
+      contact: {
+        name: packageJSON["author"]["name"],
+        url: packageJSON["author"]["url"],
+        email: packageJSON["author"]["email"],
+      },
+    },
+    servers: servers.map((val, idx, arr) => {
+      return {"url": val}
+    }),
+  },
+  apis: ["./endpoints/*.js"],
+};
+
+const specs = swaggerJsdoc(options);
+
 webServer.use("/api/status", statusEndpoints)
+webServer.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs));
 webServer.use(EXPRESS.static(PATH.join(__dirname,"webpages")))
 
 module.exports = webServer

@@ -3,13 +3,24 @@
   "version": "1.0.0",
   "description": "template express server",
   "main": "index.js",
+  "config":{
+    "title": "Template Express Server"
+  },
+  "repository": {
+    "type":"git",
+    "url": "https://www.github.com/samonjourus/TemplateExpressServer"
+  },
   "scripts": {
     "test": "mocha --timeout 10000"
   },
   "jest": {
     "collectCoverage": true
   },
-  "author": "Benjamin Standfield",
+  "author": {
+    "name":"Benjamin Standfield",
+    "email":"Benjaminstandfield@gmail.com",
+    "url":"https://www.github.com/samonjourus"
+  },
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
