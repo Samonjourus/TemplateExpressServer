@@ -12,6 +12,7 @@ COPY . .
 
 # Installing dependencies
 RUN npm install
+
 # Starting our application
 CMD [ "node", "index.js" ]
 
